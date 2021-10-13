@@ -23,6 +23,7 @@
 # -----------------------------------------------------------------------------
 import svg
 import voronoi
+import imageio
 import geometry
 import numpy as np
 from lxml import etree
@@ -43,7 +44,7 @@ svg_tree = etree.parse(svg_filename).getroot()
 
 # Bitmap export of the density layer in the SVG file
 img_filename = "data/BG-1024x1024-density.png"
-img = scipy.misc.imread(img_filename, mode='RGBA').astype(int)
+img = imageio.imread(img_filename).astype(int)
 img_density = img[...,3]
 img_identity = img[...,0]*256*256 + img[...,1]*256 + img[...,2]
 
@@ -228,7 +229,7 @@ plt.figure(figsize=(10,10))
 ax = plt.subplot(2,2,1, aspect=1, facecolor="white")
 # img_filename = "data/BG-1024x1024-density.png"
 img_filename = "data/BG-1024x1024-bis-density.png"
-img = scipy.misc.imread(img_filename, mode='RGBA')
+img = imageio.imread(img_filename)
 ax.imshow(img, origin='lower', extent=[xmin,xmax,ymin,ymax], interpolation="nearest")
 
 paths = [groups["Caudate"]["border"],
